@@ -1,5 +1,3 @@
 # ODA Cookbook
 
-This is the home page of your new Observable Framework app.
-
-For more, see <https://observablehq.com/framework/getting-started>.
+Navigating Official Development Assistance (ODA) data can be cahllenging due to its complex nomenclature and numerous tables. This document aims at facilitating ODA analysis explaining its main databases and breaking down ONE's methodology. 

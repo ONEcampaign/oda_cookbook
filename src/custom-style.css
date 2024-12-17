@@ -1,0 +1,6 @@
+@import url("observablehq:default.css");
+@import url("observablehq:theme-air.css");
+
+p code {
+    background: #f1f1f1;
+}

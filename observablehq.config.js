@@ -3,21 +3,27 @@ export default {
   // The app’s title; used in the sidebar and webpage titles.
   title: "ODA Cookbook",
 
-  // The pages and sections in the sidebar. If you don’t specify this option,
-  // all pages will be listed in alphabetical order. Listing pages explicitly
-  // lets you organize them into sections and have unlisted pages.
-  // pages: [
-  //   {
-  //     name: "Examples",
-  //     pages: [
-  //       {name: "Dashboard", path: "/example-dashboard"},
-  //       {name: "Report", path: "/example-report"}
-  //     ]
-  //   }
-  // ],
+  pages: [
+    {
+      name: "ODA 101",
+      path : "oda_101",
+    },
+    {
+      name: "oda-data Package",
+      path: "oda_data_package"
+    },
+    {
+      name: "Indicators",
+      path: "indicators"
+    },
+    {
+      name: "Case Studies",
+      path: "case_studies"
+    }
+  ],
 
   // Content to add to the head of the page, e.g. for a favicon:
-  head: '<link rel="icon" href="observable.png" type="image/png" sizes="32x32">',
+  head: '<link rel="icon" href="observable.png" type="image/png" sizes="32x32"><link rel="stylesheet" href="./custom-style.css" />',
 
   // The path to the source root.
   root: "src",
