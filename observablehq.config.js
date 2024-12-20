@@ -17,8 +17,8 @@ export default {
       path: "indicators"
     },
     {
-      name: "Case Studies",
-      path: "case_studies"
+      name: "Use Cases",
+      path: "use_cases"
     }
   ],
 

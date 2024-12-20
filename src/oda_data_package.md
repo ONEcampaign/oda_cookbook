@@ -29,32 +29,32 @@ The `ODAData` class is central to this pacakge and helps with:
 
 #### Initialization
 
-Initializes an `ODAData` object with the specified attributes and ensures that input parameters are valid.
+Begin by creating an `ODAData` class instance with the specified attributes.
 
 ```python
 ODAData()
 ```
 
 #### Loading indicators
-Use the method `load_indicator(indicators: str | list[str])` on a class instance to load data for one or more indicators. Any parameters specified during initialization are applied to the data:
+Use the method `load_indicator` on a class instance to load data for one or more indicators. Any parameters specified during initialization are applied to the data.
 
 ```python
-ODAData().load_indicators()
+ODAData().load_indicator(indicators: str | list[str])
 ```
 
-To see a list of available indicators, use the method `available_indicators()` on an initialized class: 
+To see a list of available indicators, use the method `available_indicators` on an initialized class: 
 
 ```python
 print(ODAData().available_indicators())
 ```
 
-See the [Appendix](#appendix_loadindicator) for more details on this method.
+See the [Appendix](#appendix_loadindicator) for more details on how indicators are loaded into the object.
 
 #### Retrieving data
-Use `get_data(indicators: str | list[str] = 'all')` on a class instance to retrieve a pandas DataFrame with the specified attributes and indicators:
+Use `get_data` on a class instance to retrieve a pandas DataFrame with the specified attributes and indicators.
 
 ```python
-ODAData().get_data()
+ODAData().get_data(indicators: str | list[str] = 'all')
 ```
 
 See the [Appendix](#appendix_getdata) for more details on this method.
@@ -62,7 +62,7 @@ See the [Appendix](#appendix_getdata) for more details on this method.
 ### Additional methods
 
 #### Donors
-To see a list of all donors, use the method `available_donors()` on a class instance:
+To see a list of all donors, use the method `available_donors` on a class instance:
 
 ```python
 print(ODAData().available_donors())
@@ -77,16 +77,16 @@ print(donor_groupings()) # Prints available groups and group breakdown
 print(list(donor_groupings())) # Prints available groups
 ```
 
-See the [Appendix](#appendix_donors) for a description of available groups.
+See the [Appendix](#appendix_donors) for a list of available donor groups.
 
 #### Recipients
-To see a list of all recipients, use the method `available_recipients()` on a class instance:
+To see a list of all recipients, use the method `available_recipients` on a class instance:
 
 ```python
 print(ODAData().available_recipients())
 ```
 
-Additionally, the `tools.groupings` module contains a dictionary with predefined recipient groups:
+A dictionary with predefined recipient groups is also included in the `tools.groupings` module:
 
 ```python
 from oda_data.tools.groupings import recipient_groupings
@@ -95,16 +95,16 @@ print(recipient_groupings()) # Prints available groups and group breakdown
 print(list(recipient_groupings())) # Prints available groups
 ```
 
-See the [Appendix](#appendix_recipients) for a description of availalble groups.
+See the [Appendix](#appendix_recipients) for a list of available recipient groups.
 
 #### Computing shares
-The method `add_share_of_total(include_share_of: bool = False)` adds a column to the output showing values as a percentage of total ODA.
+The method `add_share_of_total` adds a column to the output showing values as a percentage of total ODA.
 
 ```python
-ODAData().add_share_of_total(True)
+ODAData().add_share_of_total(include_share_of: bool = False)
 ```
 
-The method `add_share_gni()` adds a column to the output showing values as a percentage of GNI (Gross National Income).
+The method `add_share_gni` adds a column to the output showing values as a percentage of GNI (Gross National Income).
 
 ```python
 ODAData().add_share_gni()
@@ -112,7 +112,7 @@ ODAData().add_share_gni()
 
 ## Code Walkthrough
 
-This section presents the basic usage of the `oda-data` package. The following script retrieves total ODA according to the official definition in constant 2021 Euros, for the 2018-2021 period.
+The following script retrieves total ODA according to the official definition (i.e. ODA flows before 2018 and grant equivalents after) in constant 2021 Euros, for the 2018-2021 period. It is important to note that the resulting ODA values are expressed as million currency units.
 
 ```python
 from oda_data import ODAData, set_data_path
@@ -144,14 +144,14 @@ The resulting DataFrame should look like this:
 | 2018 | total_oda_official_definition | 4          | France     | EUR      | constant | 10863.209771 |
 | 2018 | total_oda_official_definition | 5          | Germany    | EUR      | constant | 22682.598838 |
 
-For a more comprehensive set of use-cases, refer to the [Case Studies page](./case_studies).
+For a more comprehensive set of use-cases, refer to the [Case Studies page](./use_cases).
 
 ## Appendix
 
 <a id="appendix_donors"></a>
 ### Donor groupings
 
-The following table shows the donor groupings available in `donor_groupings()`:
+The following table shows the donor groupings available through the `donor_groupings` method:
 
 | Group Name              | Description                                                                                                       |
 |-------------------------|-------------------------------------------------------------------------------------------------------------------|
@@ -170,7 +170,7 @@ The following table shows the donor groupings available in `donor_groupings()`:
 <a id="appendix_recipients"></a>
 ### Recipient groupings
 
-The following table shows the recipient groups available in `recipient_groupings()`:
+The following table shows the recipient groups available via the `recipient_groupings` method:
 
 | Group Name                         | Description                                                                                                                  |
 |------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
@@ -185,19 +185,19 @@ The following table shows the recipient groups available in `recipient_groupings
 | `dac2a_aggregates`                 | Aggregate groups, such as regions, LDCs, and developing countries.                                                           |
 
 ### Background processes
-While the `oda-data` package makes getting ODA data easy, there are several processes happening under the hood as the different methods of the `ODAData` class are called. This section dives deeper into the `load_indicator` and `get_data` methods. 
+While the `oda-data` package makes getting ODA data straightforward, there are several processes happening under the hood as the different methods of the `ODAData` class are called. This section dives deeper into the `load_indicator` and `get_data` methods. 
 
 <a id="appendix_loadindicator"></a>
 #### `load_indicator`
 
-1. The method checks whether the specified indicators exist in `_indicators_json`, which is loaded on `ODAData` from `indicators.json`. This file is in `oda_data/settings/indicators.json` and contains information about each indicator, including `source` and `type`.
-2. If the raw data for the `source` of an indicator has not already been loaded, it calls on the appropriate data reading function. These helper function are defined in the `oda_data.read_data.read` module and read the data from the different OECD tables, i.e. DAC1, DAC2A, CRS and Multisystem.
+1. The method checks whether the specified indicators exist in `_indicators_json`, which was loaded on `ODAData` from `indicators.json` during initialization. This  file is in `oda_data/settings/indicators.json` and contains information about each indicator, such as `source` (dac1, dac2a, crs, multisystem) and `type` (details below).
+2. If the raw data for an indicator is not already loaded, the method calls on the appropriate data reading function based on `source`. These helper function are defined in the `oda_data.read_data.read` module and read the data from the different ODA tables.
 3. Each indicator is processed based on its `type`:
-    - **DAC indicators**: Filters data directly using `ODAData._filter_indicator_data`.
-    - **ONE indicators**: Builds the indicator by combining other raw indicators via `ODAData._build_one_indicator`.
-    - **Linked indicators**: Uses fallback logic to handle missing data via `ODAData._build_linked_indicator`.
-    - **Research indicators**: Executes processing via `ODAData._build_research_indicator`.
-4. Data values are converted appropriately using `dac_exchange` or `dac_deflate`, are defined in the `oda_data.clean_data.common` module.
+    - `dac`: Filters data directly using `ODAData._filter_indicator_data`.
+    - `one`: Builds the indicator by combining other raw indicators via `ODAData._build_one_indicator`.
+    - `one_linked`: Uses fallback logic to handle missing data via `ODAData._build_linked_indicator`.
+    - `one_research`: Executes processing via `ODAData._build_research_indicator`.
+4. Data values are converted appropriately using `dac_exchange` or `dac_deflate`, which are defined in the `oda_data.clean_data.common` module.
 5. The processed data is saved to `ODAData.indicators_data[indicator]`
 
 <a id="appendix_getdata"></a>
@@ -206,6 +206,7 @@ While the `oda-data` package makes getting ODA data easy, there are several proc
 1. The method fetches the appropriate data for the loaded indicators.
 2. All DataFrames for the different indicators are concatenated into a single DataFrame.
 3. The resulting DataFrame is transformed as follows:
-   - Values are grouped and summarized via `simplify_output_df` and contextual names are added via `add_names`. 
+   - Values are grouped and summarized via `oda_data.classes.oda_data.simplify_output_df`
+   - Contextual names are added via `oda_data.classes.oda_data.add_names`. 
    - Columns added based on `add_share_of_total`, `add_share_gni`. 
    - Columns are arranged for consistency and readability via `oda_data.clean_data.common.reorder_columns`.

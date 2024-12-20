@@ -1,6 +1,6 @@
 @import url("observablehq:default.css");
 @import url("observablehq:theme-air.css");
 
-p code {
+code:not(pre code):not(a code) {
     background: #f1f1f1;
 }
