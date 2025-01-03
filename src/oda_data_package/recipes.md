@@ -1,10 +1,12 @@
-# Use cases
+# Recipes
 
-This section describes the process of retrieving data for different use cases.
+Every proper cookbook shows you how to apply what you’ve learned by walking you through real-case scenarios. In this section, we outline some practical use-cases for the `oda-data` package. Whether you’re interested in tracking ODA flows by country, comparing donor contributions, or analyzing trends over time, these step-by-step recipes will guide you through common tasks and help you make the most of the package.
+
+Ready to start cooking with ODA data? Let’s dive in!
 
 ## Aid from a donor country/group
 
-Suppose we are interested in getting ODA data for a particular donor entity. Since this involves the donor perspective, the source of this query will be DAC1 (we do not have to set this explicitly though, as the package takes care of it). The script below retrieves total, bilateral and multilateral ODA contributions from DAC member countries between 2018-2022. Since the period under consideration is from 2018 on, we load indicators in grant equivalent units (ge). Note that we do not explicitly define `currency` and `prices` when creating an `ODAData` class instance, for which the output will be in current US dollars.  
+Suppose we are interested in getting ODA data for a particular donor entity. Since this involves the donor perspective, the source of this query will be DAC1 (we do not have to set this explicitly though, as the package takes care of it). The script below retrieves total, bilateral and multilateral ODA contributions from DAC member countries between 2018-2022. Since the period under consideration is from 2018 on, we load indicators in grant equivalent units (ge). Note that we do not explicitly define `currency` and `prices` when creating an `ODAData` class instance, for which the output will be in current US dollars.
 
 ```python
 from oda_data.tools.groupings import donor_groupings

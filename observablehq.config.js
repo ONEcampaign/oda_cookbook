@@ -4,21 +4,33 @@ export default {
   title: "ODA Cookbook",
 
   pages: [
+
     {
-      name: "ODA 101",
-      path : "oda_101",
+      name: "ODA Basics",
+      path: "oda_basics"
+    },
+    {
+      name: "ODA Data",
+      path :  "oda_data",
+      pages: [
+        { name: "DAC1", path:  "oda_data/dac1" },
+        { name: "DAC2A", path:  "oda_data/dac2a" },
+        { name: "CRS", path:  "oda_data/crs" },
+        { name: "Multisystem", path:  "oda_data/multisystem" }
+      ]
     },
     {
       name: "oda-data Package",
-      path: "oda_data_package"
+      path: "oda_data_package",
+      pages: [
+        { name: "Tips + tricks", path: "oda_data_package/tips_tricks" },
+        { name: "Recipes", path: "oda_data_package/recipes" },
+        { name: "Background processes", path: "oda_data_package/background_processes"}
+      ]
     },
     {
       name: "Indicators",
       path: "indicators"
-    },
-    {
-      name: "Use Cases",
-      path: "use_cases"
     }
   ],
 

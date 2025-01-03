@@ -1,6 +1,20 @@
 @import url("observablehq:default.css");
 @import url("observablehq:theme-air.css");
 
+/* format code snippets */
 code:not(pre code):not(a code) {
     background: #f1f1f1;
+}
+
+/* format tables */
+table {
+  max-width: 960px;
+  border-collapse: collapse;
+  overflow-y: scroll;
+  display: block;
+}
+
+th, td {
+  white-space: nowrap;
+  padding: 5px;
 }
