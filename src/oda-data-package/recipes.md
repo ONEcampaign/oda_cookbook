@@ -1,12 +1,12 @@
 # Recipes
 
-Every proper cookbook shows you how to apply what you’ve learned by walking you through real-case scenarios. In this section, we outline some practical use-cases for the `oda-data` package. Whether you’re interested in tracking ODA flows by country, comparing donor contributions, or analyzing trends over time, these step-by-step recipes will guide you through common tasks and help you make the most of the package.
+Every proper cookbook shows you how to apply what you’ve learned by walking you through real-case scenarios. This section outlines some practical use-cases for the `oda-data` package. Whether you’re interested in tracking ODA flows by country, comparing donor contributions, or analyzing trends over time, these step-by-step recipes will guide you through common tasks and help you make the most of the package.
 
-Ready to start cooking with ODA data? Let’s dive in!
+## Aid from a donor
 
-## Aid from a donor country/group
+Suppose you are interested in getting ODA data for a particular donor entity. Since this involves the donor perspective, the source of this query will be [DAC1](../oda-data/dac1) (we do not have to set this explicitly though, as the package takes care of it). 
 
-Suppose we are interested in getting ODA data for a particular donor entity. Since this involves the donor perspective, the source of this query will be DAC1 (we do not have to set this explicitly though, as the package takes care of it). The script below retrieves total, bilateral and multilateral ODA contributions from DAC member countries between 2018-2022. Since the period under consideration is from 2018 on, we load indicators in grant equivalent units (ge). Note that we do not explicitly define `currency` and `prices` when creating an `ODAData` class instance, for which the output will be in current US dollars.
+The script below retrieves total, bilateral and multilateral ODA contributions from DAC member countries between 2018-2022. Since the period under consideration is from 2018 on, we load indicators in grant equivalent units (ge). Note that we do not explicitly define `currency` and `prices` when creating an `ODAData` class instance, for which the output will be in current US dollars by default.
 
 ```python
 from oda_data.tools.groupings import donor_groupings
@@ -32,7 +32,7 @@ indicators = ["total_oda_ge", "total_oda_bilateral_ge", "total_oda_multilateral_
 oda_from_dac = oda.load_indicator(indicators=indicators).add_share_of_total().get_data()
 ```
 
-We may now perform operations on the resulting DataFrame. For instance, let's verify that adding the shares of bilateral and multilateral ODA result in 100:
+We can now analyze the resulting DataFrame. For instance, let's verify that adding the shares of bilateral and multilateral ODA result in 100:
 
 ```python
 # pivot table to create share columns for each indicator
@@ -84,16 +84,18 @@ print(f"Bilateral ODA from France in 2020: US$ {france_bi_2020: .2f} million")
 # Bilateral ODA from France in 2020: US$  9146.07 million
 ```
 
-## Aid to a recipient country/group
+## Aid to a recipient
 
-Suppose we are interested in retrieving ODA data to a particular recipient country or region, say Africa. In this case, we want to get the recipient's perspective so the resulting data will come from DAC2A. In this sense, we need to adjust the indicators loaded on `ODAData` class so that they begin with `recipient_`. Note how the recipient group we are selecting is `african_countries_regional`, which includes countries and regions in Africa. This group captures total ODA to Africa, as ODA flows to countries do not overlap with those to regions.
+You would like to retrieve ODA data to a particular recipient country or region. This query involves the recipient's perspective so the resulting data will come from [DAC2A](../oda-data/dac2a). 
+
+In this case, the indicators loaded need to be adjusted so that they begin with `recipient_`. Note how the selected recipient group is `african_countries_regional`, which includes countries and regions in Africa. This group captures total ODA to Africa, as ODA flows to countries do not overlap with those to regions.
 
 ```python
 from oda_data.tools.groupings import recipient_groupings
 from oda_data import set_data_path, ODAData
 
 # set the path to the directory where the data should be stored
-set_data_path("./code_examples/data")
+set_data_path("path/to/data/folder)
 
 # get ids of african countries and regions
 africa_all = recipient_groupings()["african_countries_regional"]
@@ -116,7 +118,7 @@ indicators = [
 oda_to_africa = oda.load_indicator(indicators=indicators).add_share_of_gni().get_data()
 ```
 
-Let's determine what countries received the largest total ODA contributions as a share of GNI:
+Let's determine what countries received the largest annual ODA contributions as a share of GNI:
 
 ```python
 # compute total ODA share of GNI for each country per year and sort values
@@ -166,4 +168,4 @@ print(pivot)
 # 4  2022                     353860.27                         112040.62                 465900.89  0.7595183387608467  0.24048166123915324
 ```
 
-## Aid to a country/group by sector
+## Aid by sector

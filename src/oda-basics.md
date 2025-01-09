@@ -4,7 +4,7 @@ ODA is packed with technical jargon and concepts. Here, we break down some of th
 ## What is ODA?
 ODA stands for Official Development Assistance—resources like money, goods, and services aimed at supporting low-income countries. These funds can help build infrastructure, promote public health, or respond to humanitarian crises.
 
-The Development Assistant committee (DAC) is a group of high-income countries which oversees how ODA is managed and monitored within the OECD. While DAC members are the main contributors to ODA, non-DAC countries, multilateral organizations, and private institutions also play a role in providing ODA. 
+The Development Assistant committee (DAC) is a group of high-income countries which oversees how ODA is managed and monitored within the OECD. While DAC members are the main contributors to ODA, non-DAC countries, multilateral organizations, and private institutions play a role in providing ODA as well. 
 
 The DAC also determines which countries qualify to receive ODA and which international organizations can report ODA contributions. More on this [here](https://www.oecd.org/en/topics/oda-eligibility-and-conditions/dac-list-of-oda-recipients.html).
 

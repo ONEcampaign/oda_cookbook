@@ -1,22 +1,22 @@
 # Tips and Tricks
 
-Want to take your cooking to the next level? This section dives deeper into the `oda-data` package, with additional features to help you whip up insights like a chef.
+Want to take your cooking to the next level? This section dives deeper into the `oda-data` package, with additional features to help you gather insights like a chef.
 
 ## Computing Shares
 
 The `oda-data` package provides methods to easily compute shares of total ODA or Gross National Income (GNI):
 
-### Share of Total ODA
+#### Share of Total ODA
 
-To add a column showing values as a percentage of total ODA, run the following method before `get_data`:
+Use the following method before `get_data` to add a column showing values as a percentage of total ODA:
 
   ```python
   ODAData().add_share_of_total(True)
   ```
 
-### Share of GNI
+#### Share of GNI
 
-You can add a column showing ODA values as a percentage of (Gross National Income) GNI as follows:
+You can add a column showing ODA values as a percentage of GNI as follows:
 
   ```python
   ODAData().add_share_gni(True)
@@ -30,7 +30,7 @@ To view a list of all available donors:
 ODAData().available_donors()
 ```
 
-### Donor Groupings
+#### Donor Groupings
 Predefined donor groups are available to retrieve donor data by specific categories:
 
 ```python
@@ -58,13 +58,13 @@ These are the available donor groupings:
 
 ## Recipients
 
-You can view a list of all available recipients:
+To view a list of all available recipients:
 
 ```python
 ODAData().available_recipients()
 ```
 
-### Recipient Groupings
+#### Recipient Groupings
 
 Predefined recipient groups are also available:
 
@@ -74,7 +74,7 @@ from oda_data.tools.groupings import recipient_groupings
 recipient_groupings()
 ```
 
-These are the available recipient groupings:
+These are the predefined recipient groupings:
 
 | Group Name                         | Description                                                                                                                  |
 |------------------------------------|------------------------------------------------------------------------------------------------------------------------------|

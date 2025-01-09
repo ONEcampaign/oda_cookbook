@@ -4,7 +4,7 @@ The `oda-data` python package is ONE's primary tool for accessing and working wi
 
 Beyond standard OECD DAC indicators, the package also offers access to unique datasets and analyses created by ONE, such as gender or climate-related data in gross disbursement terms and imputations for multilateral sectors. As an additional feature, the package  lets you view data in multiple currencies.
 
-The package lives in a [GitHub repository](https://github.com/ONEcampaign/oda_data_package) and can be installed with pip:
+`oda-data` lives in a [GitHub repository](https://github.com/ONEcampaign/oda_data_package) and can be installed via pip:
 
 ```bash
 pip install oda-data --upgrade
@@ -18,17 +18,17 @@ Begin by importing the package into your python environment:
 import oda_data 
 ```
 
-The `ODAData` class is the heart of the `oda-data` package. It lets you access and work with ODA data with minimal code by specifying key attributes such as years, donors, recipients and more. This is like opening a blank file where you will load your data.
+The `ODAData` class is the heart of the `oda-data` package. It lets you access and work with ODA data with minimal code by specifying key attributes such as years, donors, recipients and more. Any operation done with the `oda-data` packages requires an `ODAData` instance. This is like opening a blank file where you will load your data.
 
 ```python
 oda = oda_data.ODAData(
-   years= [],           # List of years to include in the data. Default is an empty list (all years).
-   donors=None,         # List of donor codes. Default is None (all donors).
-   recipients=None,     # List of recipient codes. Default is None (all recipients).  
-   currency='USD',      # Currency for data (e.g., "USD", "EUR", "GBP", "CAD"). Default is "USD".
-   prices="current",    # Pricing mode: "current" (default) or "constant". 
-   base_year=None,      # Base year for constant prices. Required if prices is set to "constant".
-   include_names=False, # Whether to include names in the data. Default is False.
+   years= [],           # List of years to include in the data. Default is an empty list (all years)
+   donors=None,         # List of donor codes. Default is None (all donors)
+   recipients=None,     # List of recipient codes. Default is None (all recipients)  
+   currency='USD',      # Currency for data (e.g., "USD", "EUR", "GBP", "CAD"). Default is "USD"
+   prices="current",    # Pricing mode: "current" (default) or "constant" 
+   base_year=None,      # Base year for constant prices. Required if prices is set to "constant"
+   include_names=False, # Whether to include names in the data. Default is False
 )
 ```
 
@@ -36,7 +36,7 @@ Now, you can load data by specifying the ODA indicator you are interested in:
 
 ```python
 oda.load_indicator(
-   indicators="total_oda_official_definition" # Single or list of string indicators. 
+   indicators="total_oda_official_definition" # One or many string indicators in a list
 )
 ```
 
@@ -46,17 +46,17 @@ Not sure what indicators are available? No problem! You can quickly check with:
 oda.available_indicators()
 ```
 
-After loading the data, you can get a ready to use pandas DataFrame: 
+After loading the data, you can use it as a pandas DataFrame: 
 
 ```python
 data = oda.get_data()
 ```
 
-Note that the resulting ODA values are expressed as million currency units.
+Note that the resulting ODA values are expressed in million currency units.
 
 ## Code Walkthrough
 
-The following script retrieves total ODA according to the official definition (i.e. ODA flows before 2018 and grant equivalents after) in constant 2021 Euros, for the 2018-2021 period.
+The following script retrieves total ODA according to the official definition (i.e. ODA flows before 2018 and grant equivalents after) in constant 2021 Euros between 2018-2021.
 
 ```python
 from oda_data import ODAData, set_data_path

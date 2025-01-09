@@ -1,3 +1,3 @@
 # Indicators
 
-This section will describe the indicators schema.
+Placeholder section to describe the indicator schema.

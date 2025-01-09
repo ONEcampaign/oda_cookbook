@@ -7,25 +7,25 @@ export default {
 
     {
       name: "ODA Basics",
-      path: "oda_basics"
+      path: "oda-basics"
     },
     {
       name: "ODA Data",
-      path :  "oda_data",
+      path :  "oda-data",
       pages: [
-        { name: "DAC1", path:  "oda_data/dac1" },
-        { name: "DAC2A", path:  "oda_data/dac2a" },
-        { name: "CRS", path:  "oda_data/crs" },
-        { name: "Multisystem", path:  "oda_data/multisystem" }
+        { name: "DAC1", path:  "oda-data/dac1" },
+        { name: "DAC2A", path:  "oda-data/dac2a" },
+        { name: "CRS", path:  "oda-data/crs" },
+        { name: "MultiSystem", path:  "oda-data/multisystem" }
       ]
     },
     {
       name: "oda-data Package",
-      path: "oda_data_package",
+      path: "oda-data-package",
       pages: [
-        { name: "Tips + tricks", path: "oda_data_package/tips_tricks" },
-        { name: "Recipes", path: "oda_data_package/recipes" },
-        { name: "Background processes", path: "oda_data_package/background_processes"}
+        { name: "Tips + tricks", path: "oda-data-package/tips-tricks" },
+        { name: "Recipes", path: "oda-data-package/recipes" },
+        { name: "Background processes", path: "oda-data-package/background-processes"}
       ]
     },
     {
