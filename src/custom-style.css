@@ -6,7 +6,7 @@ code:not(pre code):not(a code) {
     background: #f1f1f1;
 }
 
- format tables
+ /*format tables*/
 table {
   max-width: 960px;
   border-collapse: collapse;
@@ -14,7 +14,7 @@ table {
   display: block;
 }
 
-/*th, td {*/
-/*  white-space: nowrap;*/
-/*  padding: 5px;*/
-/*}*/
+th, td {
+  white-space: nowrap;
+  padding: 5px 50px;
+}

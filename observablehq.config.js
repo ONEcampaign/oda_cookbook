@@ -36,9 +36,8 @@ export default {
 
     // Content to add to the head of the page, e.g. for a favicon:
     head: '<link rel="icon" href="ONE-logo-favicon.png" type="image/png" sizes="32x32">',
-
-    // The path to the source root.
     root: "src",
+    style: "custom-style.css"
 
     // Some additional configuration options and their defaults:
     // theme: "default", // try "light", "dark", "slate", etc.
