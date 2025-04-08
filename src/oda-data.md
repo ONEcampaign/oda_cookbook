@@ -8,7 +8,7 @@ The OECD publishes ODA data across numerous tables, which makes it tricky to fin
 
 At ONE, we get most of our ODA data from:
 
-- [DAC1](./oda-data/dac1): Provides a broad overview of aid as reported by donors.
-- [DAC2A](./oda-data/dac2a): Useful for tracking flows of ODA from a donor to a recipient.
-- [CRS](./oda-data/crs): Provides detailed project-level data of bilateral aid flows.
-- [MultiSystem](./oda-data/multisystem): Contains detailed project-level data of multilateral aid flows.
+- [DAC1](./oda-data/dac1), which offers a broad overview of aid as reported by donors.
+- [DAC2A](./oda-data/dac2a), a useful table for tracking flows of ODA from donors to recipients.
+- [CRS](./oda-data/crs), which provides detailed project-level data of bilateral aid flows.
+- [MultiSystem](./oda-data/multisystem), which contains detailed project-level data of multilateral aid flows.
