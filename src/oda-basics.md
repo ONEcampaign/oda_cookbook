@@ -21,12 +21,17 @@ this [here](https://www.oecd.org/en/topics/oda-eligibility-and-conditions/dac-li
 
 Understanding ODA requires grasping some key distinctions:
 
-#### Bilateral vs multilateral
+#### Bilateral vs multilateral ODA
 
 Bilateral aid flows directly from donor governments to recipient countries, while multilateral aid is channeled through
 international agencies that manage and allocate the funds. The key difference? who controls the money. Bilateral aid
 means the donor country calls the shots, even if a multilateral organization helps deliver it. Multilateral aid, on the
 other hand, leaves the decision-making to the international agencies.
+
+Sometimes we want to track multilateral aid from a donor to a recipient. Since these funds are pooled and
+redistributed by multilateral organisations, they can’t be directly traced. Instead, we estimate **imputed multilateral**
+flows based on the share each donor contributes to multilateral organisations and how those organisations allocate aid
+to recipients.
 
 #### Grants vs loans
 
@@ -45,5 +50,5 @@ Commitments reflect donor intentions, while disbursements show actual ODA paymen
 received.
 
 For more information on basic ODA concepts, visit
-OECD's [ODA webpage](https://www.oecd.org/en/topics/official-development-assistance-oda.html)
+the OECD's [ODA webpage](https://www.oecd.org/en/topics/official-development-assistance-oda.html)
 and [FAQs](https://www.oecd.org/en/data/insights/data-explainers/2024/07/frequently-asked-questions-on-official-development-assistance-oda.html).
