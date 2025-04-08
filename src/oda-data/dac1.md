@@ -10,8 +10,8 @@ DAC1 helps answer questions like:
 - _How much ODA does Country X provide to UN agencies?_
 
 In addition to broad aid types such as bilateral and multilateral, DAC1 breaks down contributions into smaller
-categories that are useful for more in-depth analysis. The following diagram should give you a rough overview of how
-DAC1 breaks down contributions:
+categories that are useful for more in-depth analysis. The following diagram gives a rough overview of how DAC1 breaks
+down contributions:
 
 ```
 ├── Official Development Assistance
