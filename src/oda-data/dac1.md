@@ -36,8 +36,10 @@ official flow for contributions after 2017 should be 'Grant equivalents' and 'Di
 A final breakdown is amount type or currency, which includes dollars in current and constant prices as well
 as local currency units.
 
-If you choose to work with DAC1 data directly – as opposed to via the [oda-data package](../oda-data-package) – make
-sure your data contains a unique flow and amount type, as well as non-overlapping aid types and donor countries.
+<div class="warning">
+If you choose to work with DAC1 data directly — as opposed to via the <a href="../oda-data-package">oda-data package</a> — make
+sure your data contains a unique flow and amount type, as well as non-overlapping aid types and donor groups.
+</div>
 
 This is what the DAC1 looks like:
 
