@@ -1,8 +1,12 @@
 # oda-data Package
 
-The `oda-data` python package is ONE's primary tool for accessing and working with ODA data. It speeds up analysis by handling the heavy lifting—downloading, cleaning, and loading data directly from the OECD's bulk download service. Once stored locally, generating outputs is incredibly fast.
+The `oda-data` python package is ONE's primary tool for accessing and working with ODA data. It speeds up analysis by
+handling the heavy lifting—downloading, cleaning, and loading data directly from the OECD's bulk download service. Once
+stored locally, getting the data is really fast.
 
-Beyond standard OECD DAC indicators, the package also offers access to unique datasets and analyses created by ONE, such as gender or climate-related data in gross disbursement terms and imputations for multilateral sectors. As an additional feature, the package  lets you view data in multiple currencies.
+Beyond standard OECD DAC indicators, the package also offers access to unique datasets and analyses created by ONE, such
+as gender or climate-related data in gross disbursement terms and imputations for multilateral sectors. As an additional
+feature, the package handles currency conversion.
 
 `oda-data` lives in a [GitHub repository](https://github.com/ONEcampaign/oda_data_package) and can be installed via pip:
 
@@ -18,45 +22,49 @@ Begin by importing the package into your python environment:
 import oda_data 
 ```
 
-The `ODAData` class is the heart of the `oda-data` package. It lets you access and work with ODA data with minimal code by specifying key attributes such as years, donors, recipients and more. Any operation done with the `oda-data` packages requires an `ODAData` instance. This is like opening a blank file where you will load your data.
+The `Indicators` class is the heart of the `oda-data` package. It lets you access and work with ODA data with minimal
+code by specifying key attributes such as years, providers, recipients and more. Most operations done with the
+`oda-data` package require an `Indicators` instance. This is like opening a blank file where you will load your data.
 
 ```python
 oda = oda_data.ODAData(
-   years= [],           # List of years to include in the data. Default is an empty list (all years)
-   donors=None,         # List of donor codes. Default is None (all donors)
-   recipients=None,     # List of recipient codes. Default is None (all recipients)  
-   currency='USD',      # Currency for data (e.g., "USD", "EUR", "GBP", "CAD"). Default is "USD"
-   prices="current",    # Pricing mode: "current" (default) or "constant" 
-   base_year=None,      # Base year for constant prices. Required if prices is set to "constant"
-   include_names=False, # Whether to include names in the data. Default is False
+    years= [],                    # List of years to include in the data. Default is None (all years)
+    providers=None,               # List of donor codes. Default is None (all donors)
+    recipients=None,              # List of recipient codes. Default is None (all recipients)  
+    measure="net_disbursement"    # String or list with measures. Default is "net_disbursement"
+    currency='USD',               # Currency for data (e.g., "USD", "EUR", "GBP", "CAD"). Default is "USD"
+    base_year=Nonne,              # Base year for constant prices conversion. Default is None, which returns current prices
+    use_bulk_download = False     # Whether to use the bulk download service or the data-explorer API. Default is False
+    refresh_data = False          # Whether to download new data instead of using saved filed. Default is False
 )
 ```
 
-Now, you can load data by specifying the ODA indicator you are interested in:
+Now, you get as a DataFrame data by specifying the ODA indicator(s) you are interested in. For example, to get a
+provider's bilateral ODA in grant equivalents, we use the following indicator code:
 
 ```python
-oda.load_indicator(
-   indicators="total_oda_official_definition" # One or many string indicators in a list
+data = oda.get_indicators(
+   indicators="DAC1.10.11015"
 )
 ```
 
-Not sure what indicators are available? No problem! You can quickly check with: 
+Not sure what indicators are available? No problem! You can quickly check with:
 
 ```python
 oda.available_indicators()
 ```
 
-After loading the data, you can use it as a pandas DataFrame: 
+You may also export a detailed CSV with indicator codes, names and descriptions:
 
 ```python
-data = oda.get_data()
+oda.export_available_indicators(export_folder="path/to/folder/")
 ```
 
-Note that the resulting ODA values are expressed in million currency units.
+You can learn more about the package's nomenclature for indicators [here](./oda-data-package/indicators).
 
 ## Code Walkthrough
 
-The following script retrieves total ODA according to the official definition (i.e. ODA flows before 2018 and grant equivalents after) in constant 2021 Euros between 2018-2021.
+The following script retrieves total ODA in grant equivalents and constant 2023 Euros between 2018-2023.
 
 ```python
 from oda_data import ODAData, set_data_path
@@ -65,29 +73,28 @@ from oda_data import ODAData, set_data_path
 set_data_path("path/to/data/folder")
 
 # create object, specifying key details of the desired output
-oda = ODAData(
-   years=range(2018, 2022), 
-   currency="EUR", 
-   prices="constant",
-   base_year=2021, 
-   include_names=True
+oda = Indicators(
+    years=range(2018, 2024),
+    measure="grant_equivalent",
+    currency="EUR",
+    base_year=2023,
 )
 
 # load indicator
-oda.load_indicator(indicators=["total_oda_official_definition"])
-
-# get the data
-data = oda.get_data()
+data = oda.get_indicators(indicators="DAC1.10.11010")
 
 print(data.head())
 ```
 
 The resulting DataFrame should look like this:
 
-| year | indicator                     | donor_code | donor_name | currency | prices   | value        |
-|------|-------------------------------|------------|------------|----------|----------|--------------|
-| 2018 | total_oda_official_definition | 1          | Austria    | EUR      | constant | 1054.254302  |
-| 2018 | total_oda_official_definition | 2          | Belgium    | EUR      | constant | 2089.360102  |
-| 2018 | total_oda_official_definition | 3          | Denmark    | EUR      | constant | 2352.403505  |
-| 2018 | total_oda_official_definition | 4          | France     | EUR      | constant | 10863.209771 |
-| 2018 | total_oda_official_definition | 5          | Germany    | EUR      | constant | 22682.598838 |
+| donor_code | donor_name | aidtype_code | aid_type                                                | flows_code | fund_flows        | sector_code | sector_name    | year | value        | unit_multiplier | currency | prices   | one_indicator |
+|------------|------------|--------------|---------------------------------------------------------|------------|-------------------|-------------|----------------|------|--------------|-----------------|----------|----------|---------------|
+| 1          | Austria    | 11010        | Official Development Assistance (ODA), grant equivalent | 1160       | Grant equivalents | <NA>        | Not applicable | 2023 | 1807.10544   | 6               | EUR      | constant | DAC1.10.11010 |
+| 2          | Belgium    | 11010        | Official Development Assistance (ODA), grant equivalent | 1160       | Grant equivalents | <NA>        | Not applicable | 2023 | 2613.059392  | 6               | EUR      | constant | DAC1.10.11010 |
+| 3          | Denmark    | 11010        | Official Development Assistance (ODA), grant equivalent | 1160       | Grant equivalents | <NA>        | Not applicable | 2023 | 2850.78848   | 6               | EUR      | constant | DAC1.10.11010 |
+| 4          | France     | 11010        | Official Development Assistance (ODA), grant equivalent | 1160       | Grant equivalents | <NA>        | Not applicable | 2023 | 14266.371712 | 6               | EUR      | constant | DAC1.10.11010 |
+| 5          | Germany    | 11010        | Official Development Assistance (ODA), grant equivalent | 1160       | Grant equivalents | <NA>        | Not applicable | 2023 | 33923.828032 | 6               | EUR      | constant | DAC1.10.11010 |
+
+Note that values are always expressed in million currency units, as indicated by the `unit_multiplier` column, i.e. all
+values should be multiplied by 10<sup>6</sup>.
