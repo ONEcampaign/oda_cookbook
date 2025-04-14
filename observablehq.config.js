@@ -25,12 +25,8 @@ export default {
             pages: [
                 {name: "Tips + tricks", path: "oda-data-package/tips-tricks"},
                 {name: "Recipes", path: "oda-data-package/recipes"},
-                {name: "Background processes", path: "oda-data-package/background-processes"}
+                {name: "Indicators", path: "oda-data-package/indicators"}
             ]
-        },
-        {
-            name: "Indicators",
-            path: "indicators"
         }
     ],
 
