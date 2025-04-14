@@ -10,11 +10,11 @@ code:not(pre code):not(a code) {
 table {
   max-width: 960px;
   border-collapse: collapse;
-  overflow-y: scroll;
+  overflow-y: auto;
   display: block;
 }
 
 th, td {
   white-space: nowrap;
-  padding: 5px 50px;
+  padding: 5px 30px;
 }
