@@ -1,3 +1,6 @@
+@import url("@one-data/observable-themes/styles/header.css");
+@import url("@one-data/observable-themes/styles/footer.css");
+@import url("@one-data/observable-themes/styles/sidebar.css");
 @import url("observablehq:default.css");
 @import url("observablehq:theme-air.css");
 
