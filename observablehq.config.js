@@ -1,3 +1,5 @@
+import { generateHeader } from "@one-data/observable-themes/header-template";
+
 // See https://observablehq.com/framework/config for documentation.
 export default {
     // The app’s title; used in the sidebar and webpage titles.
@@ -31,9 +33,17 @@ export default {
     ],
 
     // Content to add to the head of the page, e.g. for a favicon:
-    head: '<link rel="icon" href="ONE-logo-favicon.png" type="image/png" sizes="32x32">',
+    head: `<link rel="icon" href="ONE-logo-favicon.png" type="image/png" sizes="32x32">'
+      <script src="npm:@one-data/observable-themes/header.js" defer></script>
+      <script src="npm:@one-data/observable-themes/footer.js" defer></script>`,
+
+    header: generateHeader({title: "ODA Cookbook"}),
+    footer: "",
+
     root: "src",
-    style: "custom-style.css"
+    style: "custom-style.css",
+
+    toc: true
 
     // Some additional configuration options and their defaults:
     // theme: "default", // try "light", "dark", "slate", etc.
