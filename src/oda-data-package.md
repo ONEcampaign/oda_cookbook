@@ -16,34 +16,32 @@ pip install oda-data --upgrade
 
 ## Getting started
 
-Begin by importing the package into your python environment:
+Most operations done with the `oda-data` package require creating an instance of the `OECDClient` class. This is like
+opening a blank file where you will load your data.
+
+Start by importing the dataset into your Python environment, then define the key attributes you're interested in—such as
+years, providers, recipients, and more:
 
 ```python
-import oda_data 
-```
+form oda_data import OECDClient
 
-The `Indicators` class is the heart of the `oda-data` package. It lets you access and work with ODA data with minimal
-code by specifying key attributes such as years, providers, recipients and more. Most operations done with the
-`oda-data` package require an `Indicators` instance. This is like opening a blank file where you will load your data.
-
-```python
-oda = oda_data.ODAData(
-    years= [],                    # List of years to include in the data. Default is None (all years)
+client = OECDClient(
+    years=[],                    # List of years to include in the data. Default is None (all years)
     providers=None,               # List of donor codes. Default is None (all donors)
     recipients=None,              # List of recipient codes. Default is None (all recipients)  
     measure="net_disbursement"    # String or list with measures. Default is "net_disbursement"
     currency='USD',               # Currency for data (e.g., "USD", "EUR", "GBP", "CAD"). Default is "USD"
     base_year=Nonne,              # Base year for constant prices conversion. Default is None, which returns current prices
-    use_bulk_download = False     # Whether to use the bulk download service or the data-explorer API. Default is False
-    refresh_data = False          # Whether to download new data instead of using saved filed. Default is False
+    use_bulk_download=False     # Whether to use the bulk download service or the data-explorer API. Default is False
+    refresh_data=False          # Whether to download new data instead of using saved filed. Default is False
 )
 ```
 
-Now, you get as a DataFrame data by specifying the ODA indicator(s) you are interested in. For example, to get a
-provider's bilateral ODA in grant equivalents, we use the following indicator code:
+Now you can retrieve the data as a DataFrame by specifying the ODA indicator(s) relevant to your analysis. For instance,
+to access a provider’s bilateral ODA reported in grant equivalents, you can use the following indicator code:
 
 ```python
-data = oda.get_indicators(
+data = client.get_indicators(
    indicators="DAC1.10.11015"
 )
 ```
@@ -51,13 +49,13 @@ data = oda.get_indicators(
 Not sure what indicators are available? No problem! You can quickly check with:
 
 ```python
-oda.available_indicators()
+client.available_indicators()
 ```
 
 You may also export a detailed CSV with indicator codes, names and descriptions:
 
 ```python
-oda.export_available_indicators(export_folder="path/to/folder/")
+client.export_available_indicators(export_folder="path/to/folder/")
 ```
 
 You can learn more about the package's nomenclature for indicators [here](./oda-data-package/indicators).
@@ -66,22 +64,29 @@ You can learn more about the package's nomenclature for indicators [here](./oda-
 
 The following script retrieves total ODA in grant equivalents and constant 2023 Euros between 2018-2023.
 
+<div class="warning">
+    This retrieves ODA flows from all aid providers, i.e. countries, multilateral organisations and private donors. 
+    This is likely to result in double-counting, as some of the funding from multilateral organisations comes from 
+    countries and private donors. As a general rule, <b>avoid mixing provider types</b> (bilateral, multilateral, private). 
+</div>
+
 ```python
-from oda_data import ODAData, set_data_path
+from oda_data import OECDClient, set_data_path
 
 # set the path to the folder where the data should be stored
 set_data_path("path/to/data/folder")
 
 # create object, specifying key details of the desired output
-oda = Indicators(
+client = OECDClient(
     years=range(2018, 2024),
     measure="grant_equivalent",
     currency="EUR",
     base_year=2023,
+    use_bulk_download=True
 )
 
 # load indicator
-data = oda.get_indicators(indicators="DAC1.10.11010")
+data = client.get_indicators(indicators="DAC1.10.11010")
 
 print(data.head())
 ```
@@ -96,5 +101,7 @@ The resulting DataFrame should look like this:
 | 4          | France     | 11010        | Official Development Assistance (ODA), grant equivalent | 1160       | Grant equivalents | <NA>        | Not applicable | 2023 | 14266.371712 | 6               | EUR      | constant | DAC1.10.11010 |
 | 5          | Germany    | 11010        | Official Development Assistance (ODA), grant equivalent | 1160       | Grant equivalents | <NA>        | Not applicable | 2023 | 33923.828032 | 6               | EUR      | constant | DAC1.10.11010 |
 
-Note that values are always expressed in million currency units, as indicated by the `unit_multiplier` column, i.e. all
-values should be multiplied by 10<sup>6</sup>.
+<div class="warning">
+    Note that values are always expressed in million currency units, as indicated by the `unit_multiplier` column, i.e. 
+    all values should be multiplied by 10<sup>6</sup>.
+</div>
