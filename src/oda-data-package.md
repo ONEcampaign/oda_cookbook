@@ -26,12 +26,12 @@ years, providers, recipients, and more:
 form oda_data import OECDClient
 
 client = OECDClient(
-    years=[],                    # List of years to include in the data. Default is None (all years)
-    providers=None,               # List of donor codes. Default is None (all donors)
-    recipients=None,              # List of recipient codes. Default is None (all recipients)  
-    measure="net_disbursement"    # String or list with measures. Default is "net_disbursement"
-    currency='USD',               # Currency for data (e.g., "USD", "EUR", "GBP", "CAD"). Default is "USD"
-    base_year=Nonne,              # Base year for constant prices conversion. Default is None, which returns current prices
+    years=[],                   # List of years to include in the data. Default is None (all years)
+    providers=None,             # List of donor codes. Default is None (all donors)
+    recipients=None,            # List of recipient codes. Default is None (all recipients)  
+    measure="net_disbursement"  # String or list with measures. Default is "net_disbursement"
+    currency='USD',             # Currency for data (e.g., "USD", "EUR", "GBP", "CAD"). Default is "USD"
+    base_year=Nonne,            # Base year for constant prices conversion. Default is None, which returns current prices
     use_bulk_download=False     # Whether to use the bulk download service or the data-explorer API. Default is False
     refresh_data=False          # Whether to download new data instead of using saved filed. Default is False
 )
