@@ -1,4 +1,6 @@
-import { generateHeader } from "@one-data/observable-themes/header-template";
+import {generateHeader} from "@one-data/observable-themes/header";
+import {generateFooter} from "@one-data/observable-themes/footer";
+import {icon} from "@one-data/observable-themes/use-images";
 
 // See https://observablehq.com/framework/config for documentation.
 export default {
@@ -32,30 +34,13 @@ export default {
         }
     ],
 
-    // Content to add to the head of the page, e.g. for a favicon:
-    head: `<link rel="icon" href="ONE-logo-favicon.png" type="image/png" sizes="32x32">'
-      <script src="npm:@one-data/observable-themes/header.js" defer></script>
-      <script src="npm:@one-data/observable-themes/footer.js" defer></script>`,
+    head: `<link rel="icon" href=${icon} type="image/png" sizes="32x32">`,
 
     header: generateHeader({title: "ODA Cookbook"}),
-    footer: "",
+    footer: generateFooter(),
 
     root: "src",
     style: "custom-style.css",
 
     toc: true
-
-    // Some additional configuration options and their defaults:
-    // theme: "default", // try "light", "dark", "slate", etc.
-    // header: "", // what to show in the header (HTML)
-    // footer: "Built with Observable.", // what to show in the footer (HTML)
-    // sidebar: true, // whether to show the sidebar
-    // toc: true, // whether to show the table of contents
-    // pager: true, // whether to show previous & next links in the footer
-    // output: "dist", // path to the output root for build
-    // search: true, // activate search
-    // linkify: true, // convert URLs in Markdown to links
-    // typographer: false, // smart quotes and other typographic improvements
-    // preserveExtension: false, // drop .html from URLs
-    // preserveIndex: false, // drop /index from URLs
 };
